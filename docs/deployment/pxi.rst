@@ -32,7 +32,8 @@ The ATS TMA PXI uses the deployed network-shared-variable library for simulation
 Do not deploy the EtherCAT master configuration to this controller for the ATS.
 
 Configure the approved ATS variants of the EIB, safety-Modbus, and Bosch SIL files before enabling the application.
-The EIB configuration must direct encoder UDP traffic to the approved AXES PXI, safety mapping files must use the ATS mappings, and the Bosch SIL configuration must identify the approved secondary-axis simulator endpoint.
+Configure the EIB application with its approved IP address and port; the TMA PXI supplies the encoder UDP destination during operation.
+Safety mapping files must use the ATS mappings, and the Bosch SIL configuration must identify the approved secondary-axis simulator endpoint.
 After boot, validate encoder data from the EUI and verify the controller can communicate with the required simulator services.
 
 AXES PXI
@@ -46,10 +47,10 @@ The AXES PXI runs the main-axis control application and its EtherCAT interface.
 #. Verify that the EtherCAT project matches the approved ATS hardware connection order.
 #. Build and deploy the real-time target to the approved AXES PXI.
 #. Deploy the EtherCAT master from the ATS AXES project; unlike the TMA PXI, the AXES PXI does not use the TMA NSV-library deployment.
-#. Install or deploy the approved cRIO-9145 FPGA bitfile and copy the approved ATS main-axis configuration as ``/c/Configuration/MainAxisConfig.ini``.
+#. Download the approved cRIO-9145 FPGA bitfile. Copy `MainAxisConfig_forATS.ini <https://github.com/lsst-ts/ts_tma_labview_pxi-controller/blob/develop/ESIFiles/MainAxes/AxesPXI/Configuration/MainAxisConfig_forATS.ini>`_ to ``/c/Configuration`` and rename it ``MainAxisConfig.ini``.
 #. Reboot the target and confirm that the Speedgoat is available before enabling the EtherCAT chain.
 
-Use the EtherCAT *Online Master State* view to confirm that the two Speedgoat modules and the cRIO are Operational.
+Use the EtherCAT *Online Master State* view to confirm that all three slaves—the two Speedgoat modules and the cRIO—are Operational.
 If a slave is unavailable, confirm the Speedgoat is running and verify the approved physical connection order before changing configuration.
 Confirm cRIO FPGA health through its running LED, an increasing cycle counter, and its changing running-clock status.
 
@@ -77,4 +78,3 @@ PXI post-deployment validation
 #. Confirm each controller reaches only the approved ATS simulator, gateway, and safety endpoints.
 #. Perform one safe, component-specific health check for each PXI before enabling broader functional testing.
 #. Run the relevant automated smoke test and retain its result with the deployment record.
-

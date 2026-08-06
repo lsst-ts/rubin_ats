@@ -3,7 +3,7 @@ ATS Virtual Machines
 ####################
 
 The ATS virtual machines provide dedicated environments for development, runtime applications, simulators, operations tools, and automated test execution.
-They are hosted on the Base Data Center infastructure and support both day-to-day development and system operation.
+They are hosted on the Base Data Center infrastructure and support both day-to-day development and system operation.
 
 Roles and boundaries
 ####################
@@ -23,13 +23,12 @@ Historic vendor documentation describes an earlier Windows and Linux layout, but
    * - ats-windows.ls.lsst.org
      - Windows 10
      - Runs LabVIEW executables.
-   * - 
+   * - ats-bosch.ls.lsst.org
      - Linux
      - Runs bosch simulator
-   * - 
+   * - ats-manager.ls.lsst.org
      - Linux
      - Runs EUI and operations manager
-   * - 
+   * - ats-run-test.ls.lsst.org
      - Linux
      - Robotframework execution
-

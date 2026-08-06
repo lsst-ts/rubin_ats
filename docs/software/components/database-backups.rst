@@ -5,21 +5,20 @@ ATS Database Backups
 Status
 ######
 
-Supporting.
+Historical.
 
 Purpose
 #######
 
-The ATS database-backup repository stores material used to recover the ATS-specific database environment.
+The ATS database-backup repository is historical material and is not the current method for provisioning the ATS database.
 
 Interfaces and dependencies
 ###########################
 
 The ATS uses a database environment separate from production.
-Restore and validation must follow the approved recovery process before connecting EUI or operations services.
+Provision the current ATS database by copying the approved summit database to the ATS Base Data Center environment, then validate it before connecting EUI or operations services.
 
-Repository
-##########
+Historical repository
+#####################
 
 ``ts_tma_ats_database-backup``
-

@@ -2,7 +2,7 @@
 ATS Software
 ############
 
-The ATS software ecosystem is primarily implemented in LabVIEW and C++.
+The ATS software ecosystem is primarily implemented in LabVIEW and C++, with Python-based services such as the Top End Chiller simulator.
 It includes TMA control and HMI applications, real-time simulation models, subsystem simulators, communications tools, safety software, and Robot Framework automated tests.
 
 Architecture
@@ -49,7 +49,7 @@ Status describes the component's ATS role, not its current GitHub availability.
      - Active
    * - :doc:`Human-machine interfaces <components/hmi>`
      - ``ts_tma_labview_hmi-computers``
-     - Provides the EUI and handheld HMI used with the ATS.
+     - Provides the maintained EUI used with the ATS; the handheld HMI is deprecated.
      - Supporting
    * - :doc:`Mount Operation Manager <components/operation-manager>`
      - ``ts_tma_operation-manager_mt-mount-operation-manager``
@@ -101,7 +101,7 @@ Status describes the component's ATS role, not its current GitHub availability.
      - Active
    * - :doc:`Top End Chiller <components/top-end-chiller>`
      - ``ts_tma_hil_simulator_top-end-chiller``
-     - Provides the chiller Modbus service for the AUX PXI.
+     - Provides the Python-based chiller Modbus service for the AUX PXI.
      - Active
    * - :doc:`Safety system <components/safety-system>`
      - ``ts_tma_hil_test-dual-modbus``
@@ -124,8 +124,8 @@ Status describes the component's ATS role, not its current GitHub availability.
      - Sets simulation-facing TekNSV values such as brake and extension states.
      - Active
    * - :doc:`Speedgoat Manager <components/speedgoat-manager>`
-     - ``ts_tma_hil_speedgoat-speedgoat-manager``; ``ts_tma_hil_speedgoat-speedgoat-manager-python-interface``; ``ts_tma_hil_speedgoat-speedgoat-manager-binaries``
-     - Starts, stops, and injects faults into Speedgoat models.
+     - ``ts_tma_hil_main-axes_lsst-hil`` (``src/speedgoatManager.mlapp``); ``ts_tma_hil_speedgoat-speedgoat-manager-python-interface``
+     - Manages the MATLAB R2025b Speedgoat model lifecycle and injected faults.
      - Active
    * - :doc:`Windows orchestration scripts <components/windows-orchestration>`
      - ``ts_tma_hil_simulators-start-stop-scripts``
@@ -147,10 +147,6 @@ Status describes the component's ATS role, not its current GitHub availability.
      - ``ts_tma_test_testing-procedures``
      - Contains subsystem-oriented manual test procedures.
      - Supporting
-   * - :doc:`ATS database backups <components/database-backups>`
-     - ``ts_tma_ats_database-backup``
-     - Stores ATS-specific database recovery material.
-     - Supporting
 
 Deprecated or historical components
 ###################################
@@ -167,3 +163,9 @@ Deprecated or historical components
    * - Network Shared Variables simulator
      - ``ts_tma_hil_network-shared-variables-simulation``
      - Explicitly marked as no longer in use in the Tekniker software design.
+   * - Legacy Speedgoat Manager
+     - ``ts_tma_hil_speedgoat-speedgoat-manager``; ``ts_tma_hil_speedgoat-speedgoat-manager-binaries``
+     - Deprecated with MATLAB R2025b; use ``speedgoatManager.mlapp`` in the main-axes repository.
+   * - ATS database backups
+     - ``ts_tma_ats_database-backup``
+     - Historical repository that does not provision the current ATS database.

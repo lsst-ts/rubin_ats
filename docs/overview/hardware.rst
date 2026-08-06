@@ -46,7 +46,7 @@ The historic vendor design is useful for understanding those boundaries, but it 
      - Speedgoat Performance Target Machine
      - Provides AXES simulation model to PXI.
      - 
-     - Matlab 2026
+     - MATLAB R2025b
    * - EIB Tape Encoder
      - Heidenhain EIB 8791
      - Provides encoder data to the AXES PXI
@@ -62,4 +62,3 @@ The historic vendor design is useful for understanding those boundaries, but it 
      - Provides hypervisor based Virtual Machines
      -
      - VMWare ESXI
-

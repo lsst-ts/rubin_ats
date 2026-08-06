@@ -14,6 +14,13 @@ Preflight
 #. Verify the controller-side configuration points to the intended simulator endpoint.
 #. Stop the existing service in a controlled manner before replacing its files.
 
+Startup order
+*************
+
+Use the `ATS_StartSimulatorsAndTools.cmd <https://github.com/lsst-ts/ts_tma_hil_simulators-start-stop-scripts/blob/master/ATS_StartSimulatorsAndTools.cmd>`_ script as the source of truth for the Windows startup order.
+Start the network-shared-variable and TekNSV readers first, wait for them to become ready, then start the subsystem simulators.
+Start the Speedgoat manager, Top End Chiller, and WriteTekNSVVariables only after their dependencies are available.
+
 Windows LabVIEW executables
 ***************************
 
@@ -81,6 +88,8 @@ Start ``WriteTekNsvVariables.exe`` only after reviewing its configuration becaus
 Externally built simulators and services
 ****************************************
 
+Build and deploy these components using the current instructions in their owning repositories.
+
 Top End Chiller simulator
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -97,8 +106,9 @@ Confirm that its Modbus server configuration targets the TMA PXI and validate st
 Speedgoat Manager and main-axis models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Deploy the approved released Speedgoat Manager application together with the matching Speedgoat model binaries.
-Keep the manager and model directories as a compatible pair, then verify that the manager can connect to the Speedgoat before Robot Framework tests are enabled.
+Use the MATLAB R2025b ``speedgoatManager.mlapp`` application in ``ts_tma_hil_main-axes_lsst-hil`` to manage the approved main-axis model.
+Verify that the manager can connect to the Speedgoat before Robot Framework tests are enabled.
+Do not deploy the deprecated standalone Speedgoat Manager source or binary releases.
 
 Robot Framework
 ^^^^^^^^^^^^^^^
@@ -110,7 +120,7 @@ Windows start and stop scripts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Configure the Windows start/stop scripts with the deployed application paths.
-Test controlled startup and shutdown of one non-safety simulator first, then verify that the full sequence starts the approved applications in the intended order.
+Test controlled startup and shutdown of one non-safety simulator first, then verify that the full sequence follows the documented startup order.
 
 Deprecated component
 ********************
@@ -125,4 +135,3 @@ Post-deployment validation
 #. Verify its configured network connection from the corresponding PXI or client application.
 #. Exercise one safe, component-specific health check and review the application log for connection or configuration errors.
 #. Run the relevant automated smoke test before enabling broader functional testing.
-
