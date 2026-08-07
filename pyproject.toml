@@ -1,0 +1,13 @@
+[project]
+name = "ts-rubin-ats"
+version = "0.1.0"
+description = "Documentation for the Rubin Automatic Testing System."
+readme = "README.rst"
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+docs = [
+    "documenteer[guide]",
+    "sphinx",
+]

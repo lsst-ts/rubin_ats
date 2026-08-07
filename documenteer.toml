@@ -1,0 +1,4 @@
+[project]
+title = "Rubin ATS"
+copyright = "2026 Association of Universities for Research in Astronomy"
+github_url = "https://github.com/lsst-ts/ts_rubin_ats"
