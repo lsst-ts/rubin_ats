@@ -10,4 +10,5 @@ dependencies = []
 docs = [
     "documenteer[guide]",
     "sphinx",
+    "sphinxcontrib-plantuml>=0.31",
 ]

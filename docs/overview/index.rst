@@ -11,6 +11,8 @@ The Tekniker material is retained as historical design context; current Rubin pr
 
    hardware
    virtual-machines
+   deployment-diagram
+   network-view
    roadmap
    vendor-design
 

@@ -1,0 +1,58 @@
+@startuml ATS Software Communication View (Draft)
+title Rubin ATS — software communication paths\nDraft for network debugging
+
+left to right direction
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam componentStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 80
+skinparam ranksep 110
+skinparam packagePadding 24
+skinparam defaultTextAlignment center
+
+node "ATS Base Data Center" as bdc {
+  node "ESXi hypervisor" as esxi {
+    node "ats-windows\nLabVIEW simulators and NSV tools" as win
+    node "ats-bosch\nBosch simulator\nSecondary-axis SIL" as bosch
+    node "ats-manager / ats-run-test\nEUI · Operation Manager\nRobot Framework" as clients
+  }
+}
+
+node "ATS rack hardware" as hardware {
+  package "PXI controllers" {
+    node "TMA PXI" as tma
+    node "AXES PXI" as axes
+    node "AUX PXI" as aux
+  }
+
+  package "Connected or associated equipment" {
+    node "Speedgoat" as speedgoat
+    node "Heidenhain EIB 8791\nTape encoder" as eib
+    node "cRIO 9145\nFPGA interface" as crio
+  }
+}
+
+' Dashed links show logical communication; validate paths/protocols in ATS records.
+win ..> tma : TCP / simulator traffic
+win ..> axes : TCP / simulator traffic
+win ..> aux : Modbus / TCP
+bosch ..> tma : Secondary-axis Modbus
+clients ..> tma : EUI / operations / tests
+clients ..> axes : EUI / operations / tests
+clients ..> aux : EUI / operations / tests
+axes ..> speedgoat : Main-axis model\nverify path
+eib ..> axes : UDP
+crio ..> eib : sync signal
+tma ..> eib : TCP / Configuration and Power State
+
+note bottom of tma
+  Draft software connections. Safety and test-control relationships
+  are omitted to keep this view focused on network communications.
+end note
+
+legend bottom
+  |= Line |= Meaning
+  | Dashed | Logical software communication path |
+endlegend
+@enduml
