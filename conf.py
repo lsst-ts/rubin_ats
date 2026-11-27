@@ -1,5 +1,8 @@
 from documenteer.conf.guide import *  # noqa: F401,F403
 
+extensions = [*extensions, "sphinxcontrib.plantuml"]
+plantuml_output_format = "svg_img"
+
 # These ATS repositories require authenticated GitHub access and return 404 to
 # Sphinx's unauthenticated link checker.
 linkcheck_ignore = [

@@ -1839,6 +1839,15 @@ wheels = [
 ]
 
 [[package]]
+name = "sphinxcontrib-plantuml"
+version = "0.31"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "sphinx" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/08/8f/f26dd61b92176c4cba6b7898ca2875e7dfc29263d8e1b3b63d6acf81434f/sphinxcontrib_plantuml-0.31.tar.gz", hash = "sha256:fd74752f8ea070e641c3f8a402fccfa1d4a4056e0967b56033d2a76282d9f956", size = 15736, upload-time = "2025-09-03T11:11:35.028Z" }
+
+[[package]]
 name = "sphinxcontrib-qthelp"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2022,6 +2031,7 @@ docs = [
     { name = "documenteer", version = "1.4.5", source = { registry = "https://pypi.org/simple" }, extra = ["guide"], marker = "python_full_version < '3.12'" },
     { name = "documenteer", version = "2.4.1", source = { registry = "https://pypi.org/simple" }, extra = ["guide"], marker = "python_full_version >= '3.12'" },
     { name = "sphinx" },
+    { name = "sphinxcontrib-plantuml" },
 ]
 
 [package.metadata]
@@ -2030,6 +2040,7 @@ docs = [
 docs = [
     { name = "documenteer", extras = ["guide"] },
     { name = "sphinx" },
+    { name = "sphinxcontrib-plantuml" },
 ]
 
 [[package]]

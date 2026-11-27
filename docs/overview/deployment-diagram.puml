@@ -1,0 +1,60 @@
+@startuml ATS Physical Deployment (Draft)
+title Rubin ATS — physical deployment connections\nDraft for network debugging
+
+left to right direction
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam componentStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 80
+skinparam ranksep 110
+skinparam packagePadding 24
+skinparam defaultTextAlignment center
+
+node "ATS Base Data Center" as bdc {
+  node "ESXi hypervisor" as esxi {
+    node "ats-tma-dev\nWindows 10" as dev
+    node "ats-windows\nWindows 10" as win
+    node "ats-bosch\nLinux" as bosch
+    node "ats-manager\nLinux" as manager
+    node "ats-run-test\nLinux" as test
+  }
+}
+
+node "ATS rack" as rack {
+  node "Rack network switch" as sw
+
+  package "PXI controllers" {
+    node "TMA PXI" as tma
+    node "AXES PXI" as axes
+    node "AUX PXI" as aux
+  }
+
+  package "Other rack devices" {
+    node "Speedgoat" as speedgoat
+    node "Heidenhain EIB 8791\nTape encoder" as eib
+  }
+
+  node "cRIO-9145\nFPGA interface" as crio
+}
+
+' Solid links are physical connections.
+esxi -- sw
+tma -- sw
+axes -- sw
+aux -- sw
+speedgoat -- sw
+eib -- sw
+axes -- crio : connection
+eib -- crio : connection
+
+note bottom of sw
+  Draft physical view.
+  Need to determine detail sufficient for information such as ethernet, vlan and non network connections
+end note
+
+legend bottom
+  |= Line |= Meaning
+  | Solid | Physical connection|
+endlegend
+@enduml
